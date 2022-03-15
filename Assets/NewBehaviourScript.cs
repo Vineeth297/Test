@@ -14,5 +14,6 @@ public class NewBehaviourScript : MonoBehaviour
     void Update()
 	{
 		print("Vineeth");
+		print("Vineeth");
 	}
 }
