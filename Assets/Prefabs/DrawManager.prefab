@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawPrefab: {fileID: 1677655391295645756, guid: 6e21161ddca30ad4ea5ca2b7bbf58ccd, type: 3}
+  pathPositions: []
+  timeGap: 0
+  travelPoints: []
+  projectilePrefab: {fileID: 8720739325374695553, guid: 83bc171b8c2d9904b8b654bf28eb90da, type: 3}
+  maxRepetitions: 1
 --- !u!114 &864585681181807187
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -87,6 +87,7 @@ public class DrawManager : MonoBehaviour
 			travelPoints.Add(pathPositions[i]);
 		}
 		var lastPoint = travelPoints[^1];
+		print(lastPoint);
 
 		for (var j = 0; j < maxRepetitions; j++)
 		{
