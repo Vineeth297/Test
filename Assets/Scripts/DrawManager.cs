@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -70,7 +71,6 @@ public class DrawManager : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.A))
 		{
-			
 			var projectile = Instantiate(projectilePrefab, pathPositions[0], Quaternion.identity);
 			GeneratePathPoints();
 			projectile.GetComponent<Projectile>().travelPoints = travelPoints;
@@ -82,22 +82,24 @@ public class DrawManager : MonoBehaviour
 		if(travelPoints.Count > 0)
 			travelPoints.Clear();
 		
+		float[] xPoints = new float[pathPositions.Count];
 		for (var i = 0; i < pathPositions.Count; i++)
 		{
 			travelPoints.Add(pathPositions[i]);
+			xPoints[i] = pathPositions[i].x;
 		}
-		var lastPoint = travelPoints[^1];
-		print(lastPoint);
 
-		for (var j = 0; j < maxRepetitions; j++)
+		var horizontalLength = Mathf.Abs(xPoints.Min() - xPoints.Max());
+		var verticalLength = pathPositions[^1].y - pathPositions[0].y;
+		
+		for (int i = 1; i <= maxRepetitions; i++)
 		{
-			for (var i = 0; i < pathPositions.Count; i++)
+			for (var j = 1; j < pathPositions.Count; j++)
 			{
-				var newPoint = lastPoint + pathPositions[i];
+				var newPoint = pathPositions[j] + new Vector3(horizontalLength, verticalLength,0f) * i;
 				travelPoints.Add(newPoint);
-			}
-			lastPoint = travelPoints[^1];
+			}	
 		}
 	}
-	
 }
+

@@ -30,5 +30,7 @@ public class Projectile : MonoBehaviour
 				yield return null;
 			}
 		}
+		
+		gameObject.SetActive(false);
 	}
 }
