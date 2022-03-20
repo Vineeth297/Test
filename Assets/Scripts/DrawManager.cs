@@ -44,7 +44,7 @@ public class DrawManager : MonoBehaviour
 			if(_trail)
 				Destroy(_trail);
 			
-			_trail = Instantiate(drawPrefab, transform.position, Quaternion.identity);
+			_trail = Instantiate(drawPrefab, transform.position, UnityEngine.Quaternion.identity);
 
 			var touchRay = _camera.ScreenPointToRay(Input.mousePosition);
 
@@ -84,7 +84,7 @@ public class DrawManager : MonoBehaviour
 
 		if (!Input.GetKeyDown(KeyCode.A)) return;
 		
-		var projectile = Instantiate(projectilePrefab, pathPositions[0], Quaternion.identity);
+		var projectile = Instantiate(projectilePrefab, pathPositions[0], UnityEngine.Quaternion.identity);
 		GeneratePathPoints();
 		projectile.GetComponent<Projectile>().travelPoints = travelPoints;
 	}

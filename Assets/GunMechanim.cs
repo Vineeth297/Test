@@ -56,7 +56,7 @@ public class GunMechanim : MonoBehaviour
 
 	private void Shoot()
 	{
-		var spawnedBullet = Instantiate(bullet, bulletSpawnPosition.position,Quaternion.identity);
+		var spawnedBullet = Instantiate(bullet, bulletSpawnPosition.position,UnityEngine.Quaternion.identity);
 		
 		spawnedBullet.GetComponent<Bullet>().travelDirection = transform.forward;
 	}
