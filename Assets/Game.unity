@@ -216,7 +216,7 @@ PrefabInstance:
       objectReference: {fileID: 459363654}
     - target: {fileID: 864585681181807213, guid: 808545e6b541c6a4b8d660a8cc2b991b, type: 3}
       propertyPath: timeGap
-      value: 0.05
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 864585681181807213, guid: 808545e6b541c6a4b8d660a8cc2b991b, type: 3}
       propertyPath: maxRepetitions
