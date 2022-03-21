@@ -48,8 +48,6 @@ public class DrawManager : MonoBehaviour
 
 			var touchRay = _camera.ScreenPointToRay(Input.mousePosition);
 
-			print(touchRay);
-
 			if (!_drawPlane.Raycast(touchRay, out var hit)) return;
 			_trail.transform.position = touchRay.GetPoint(hit);
 			// _drawingStartPosition = touchRay.GetPoint(hit);
@@ -69,8 +67,7 @@ public class DrawManager : MonoBehaviour
 			
 			if (!_drawPlane.Raycast(touchDragRay, out var hit)) return;
 			_trail.transform.position = touchDragRay.GetPoint(hit);
-			//_trail.transform.position = new Vector3(touchDragRay.GetPoint(hit).x,touchDragRay.GetPoint(hit).y,0f);
-			
+
 			var point = new Vector3(_trail.transform.position.x, _trail.transform.position.y,0f);	
 			var pointToAdd = new Vector3(_xToAdd + point.x, _yToAdd + point.y, point.z );
 			

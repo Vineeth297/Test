@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea74f70c48785a428205db883737694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 0.1
+  distance: 0.015
   travelPoints: []
   rotationSpeed: 0.1
 --- !u!1 &5025707392360000959
@@ -423,8 +423,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5415161263823629210}
-  m_LocalRotation: {x: -0, y: 0.00000041723246, z: -0, w: 1}
-  m_LocalPosition: {x: -0.019999593, y: 0, z: 0.5070005}
+  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071069}
+  m_LocalPosition: {x: -0.02000001, y: 0, z: 0.007000506}
   m_LocalScale: {x: 17.85932, y: 17.85932, z: 51.360954}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -434,7 +434,7 @@ Transform:
   - {fileID: 4695321811850301516}
   m_Father: {fileID: 4396016435824017795}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &290002653049035448
 MeshFilter:
   m_ObjectHideFlags: 0
