@@ -81,7 +81,7 @@ public class DrawManager : MonoBehaviour
 
 		if (!Input.GetKeyDown(KeyCode.A)) return;
 		
-		var projectile = Instantiate(projectilePrefab, pathPositions[0], UnityEngine.Quaternion.identity);
+		var projectile = Instantiate(projectilePrefab, pathPositions[0], Quaternion.identity);
 		GeneratePathPoints();
 		projectile.GetComponent<Projectile>().travelPoints = travelPoints;
 	}
