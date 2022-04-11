@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GunMechanim : MonoBehaviour
 {
-    // Start is called before the first frame update
-
 	private Rigidbody _gunRb;
 
 	[SerializeField] private float forceAmount = 2f;
@@ -18,15 +14,11 @@ public class GunMechanim : MonoBehaviour
 	[SerializeField] private GameObject bullet;
 	[SerializeField] private ParticleSystem muzzleParticle;
 	
-	private void Start()
-	{
-		_gunRb = GetComponent<Rigidbody>();
-	}
+	private void Start() => _gunRb = GetComponent<Rigidbody>();
 
-    // Update is called once per frame
+	// Update is called once per frame
     private void Update()
 	{
-		var currentRotation = transform.rotation.x;
 		if (Input.GetMouseButtonDown(0))
 		{
 			_gunRb.velocity = Vector3.zero;
@@ -56,7 +48,7 @@ public class GunMechanim : MonoBehaviour
 
 	private void Shoot()
 	{
-		var spawnedBullet = Instantiate(bullet, bulletSpawnPosition.position,UnityEngine.Quaternion.identity);
+		var spawnedBullet = Instantiate(bullet, bulletSpawnPosition.position,Quaternion.identity);
 		
 		spawnedBullet.GetComponent<Bullet>().travelDirection = transform.forward;
 	}

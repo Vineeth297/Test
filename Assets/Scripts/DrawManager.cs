@@ -44,7 +44,7 @@ public class DrawManager : MonoBehaviour
 			if(_trail)
 				Destroy(_trail);
 			
-			_trail = Instantiate(drawPrefab, transform.position, UnityEngine.Quaternion.identity);
+			_trail = Instantiate(drawPrefab, transform.position, Quaternion.identity);
 
 			var touchRay = _camera.ScreenPointToRay(Input.mousePosition);
 
