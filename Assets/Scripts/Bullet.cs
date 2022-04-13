@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
 {
 	public Vector3 travelDirection;
 	public float shootForce = 10f;
+	
 	private void Update()
 	{
 		Shoot();
