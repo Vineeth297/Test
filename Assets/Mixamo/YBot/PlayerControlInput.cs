@@ -44,6 +44,15 @@ public partial class @PlayerControlInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouching"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecb63127-2a1e-43d3-9d89-810e4a80ae73"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -134,6 +143,28 @@ public partial class @PlayerControlInput : IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f5f2a15-ac1f-4373-9cd4-89b92c3bbad7"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f195d2a7-8f91-47a7-a8e3-c74693f64e35"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouching"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +175,7 @@ public partial class @PlayerControlInput : IInputActionCollection2, IDisposable
         m_PlayerControl = asset.FindActionMap("PlayerControl", throwIfNotFound: true);
         m_PlayerControl_Movement = m_PlayerControl.FindAction("Movement", throwIfNotFound: true);
         m_PlayerControl_Sprint = m_PlayerControl.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerControl_Crouching = m_PlayerControl.FindAction("Crouching", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -205,12 +237,14 @@ public partial class @PlayerControlInput : IInputActionCollection2, IDisposable
     private IPlayerControlActions m_PlayerControlActionsCallbackInterface;
     private readonly InputAction m_PlayerControl_Movement;
     private readonly InputAction m_PlayerControl_Sprint;
+    private readonly InputAction m_PlayerControl_Crouching;
     public struct PlayerControlActions
     {
         private @PlayerControlInput m_Wrapper;
         public PlayerControlActions(@PlayerControlInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerControl_Movement;
         public InputAction @Sprint => m_Wrapper.m_PlayerControl_Sprint;
+        public InputAction @Crouching => m_Wrapper.m_PlayerControl_Crouching;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -226,6 +260,9 @@ public partial class @PlayerControlInput : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnSprint;
+                @Crouching.started -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnCrouching;
+                @Crouching.performed -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnCrouching;
+                @Crouching.canceled -= m_Wrapper.m_PlayerControlActionsCallbackInterface.OnCrouching;
             }
             m_Wrapper.m_PlayerControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -236,6 +273,9 @@ public partial class @PlayerControlInput : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Crouching.started += instance.OnCrouching;
+                @Crouching.performed += instance.OnCrouching;
+                @Crouching.canceled += instance.OnCrouching;
             }
         }
     }
@@ -244,5 +284,6 @@ public partial class @PlayerControlInput : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnCrouching(InputAction.CallbackContext context);
     }
 }

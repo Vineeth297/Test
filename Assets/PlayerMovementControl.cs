@@ -10,14 +10,23 @@ public class PlayerMovementControl : MonoBehaviour
 	private Vector3 _playerSprintMovement;
 	private bool _isMovementKeyPressed;
 	private bool _isSprintKeyPressed;
+	private bool _isCrouchKeyPressed;
 	
 	private CharacterController _player;
 
 	private Animator _animator;
 	private static readonly int IsRunningHash = Animator.StringToHash("isRunning");
 	private static readonly int IsSprintingHash = Animator.StringToHash("isSprinting");
+	private static readonly int IsCrouching = Animator.StringToHash("isCrouching");
+	private static readonly int IsCrouchWalking = Animator.StringToHash("isCrouchWalking");
+	private static readonly int IsCrouchingTrigger = Animator.StringToHash("isCrouchingTrigger");
+	private static readonly int IsStanding = Animator.StringToHash("isStanding");
 	private bool _isRunning;
 	private bool _isSprinting;
+	private bool _isCrouching;
+	private bool _isCrouchWalking;
+
+	private int _revertAnimInt;
 
 	[SerializeField] private float rotationSpeed = 0.1f;
 	[SerializeField] private float movementSpeed = 1.5f;
@@ -37,6 +46,8 @@ public class PlayerMovementControl : MonoBehaviour
 		_playerControlInput.PlayerControl.Movement.performed += OnMovementInput;
 		_playerControlInput.PlayerControl.Sprint.started += OnRun;
 		_playerControlInput.PlayerControl.Sprint.canceled += OnRun;
+		_playerControlInput.PlayerControl.Crouching.started += OnCrouch;
+		_playerControlInput.PlayerControl.Crouching.canceled += OnCrouch;
 	}
 
 	private void OnEnable() => _playerControlInput.PlayerControl.Enable();
@@ -65,6 +76,13 @@ public class PlayerMovementControl : MonoBehaviour
 
 	private void OnRun(InputAction.CallbackContext context) => _isSprintKeyPressed = context.ReadValueAsButton();
 
+	private void OnCrouch(InputAction.CallbackContext context)
+	{
+		
+		_isCrouchKeyPressed = context.ReadValueAsButton();
+		print(context.ReadValueAsButton());
+	}
+
 	private void HandlePlayerRotation()
 	{
 		Vector3 positionToLookAt;
@@ -85,6 +103,8 @@ public class PlayerMovementControl : MonoBehaviour
 	{
 		_isRunning = _animator.GetBool(IsRunningHash);
 		_isSprinting = _animator.GetBool(IsSprintingHash);
+		_isCrouching = _animator.GetBool(IsCrouching);
+		_isCrouchWalking = _animator.GetBool(IsCrouchWalking);
 
 		if(_isMovementKeyPressed && !_isRunning)
 			_animator.SetBool(IsRunningHash, true);
@@ -95,6 +115,34 @@ public class PlayerMovementControl : MonoBehaviour
 			_animator.SetBool(IsSprintingHash,true);
 		else if((!_isMovementKeyPressed || !_isSprintKeyPressed) && _isRunning)
 			_animator.SetBool(IsSprintingHash,false);
+
+		if (_isCrouchKeyPressed && !_isCrouching)
+		{
+			_animator.SetBool(IsCrouching,true);
+			_revertAnimInt = 1;
+		}
+		else if ((_revertAnimInt == 1 && _isCrouching) && !_isCrouchKeyPressed)
+		{
+			_animator.SetBool(IsCrouching,false);
+			_revertAnimInt = 0;
+		}
+		
+		
+		/*if (_revertAnimInt == 1 && _isCrouchKeyPressed)
+		{
+			_animator.SetTrigger(IsStanding);
+			_revertAnimInt = 0;
+		}
+		else if (_isCrouchKeyPressed)
+		{
+			_animator.SetTrigger(IsCrouchingTrigger);
+			_revertAnimInt = 1;
+			print(_isCrouchKeyPressed);
+			print(_revertAnimInt);
+		}
+		*/
+
+		
 	}
 
 	private void HandleGravity()

@@ -28,6 +28,7 @@ public class MovementController : MonoBehaviour
 
 	private float _groundedGravity = 0.1f;
 	private float _gravity = -9.8f;
+	
 	private void Awake()
 	{
 		_playerInput = new PlayerInput();
