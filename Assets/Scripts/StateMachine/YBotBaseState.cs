@@ -7,4 +7,5 @@ public abstract class YBotBaseState
 	public abstract void EnterState(YBotStateMachine yBot);
 	
 	public abstract void UpdateState(YBotStateMachine yBot);
+	
 }
